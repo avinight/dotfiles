@@ -1,0 +1,22 @@
+require("frederick.plugins-setup")
+require("frederick.core.options")
+require("frederick.core.keymaps")
+require("frederick.core.colorscheme")
+require("frederick.plugins.comment")
+require("frederick.plugins.nvim-tree")
+require("frederick.plugins.lualine")
+require("frederick.plugins.telescope")
+require("frederick.plugins.nvim-cmp")
+require("frederick.plugins.lsp.mason")
+require("frederick.plugins.lsp.lspsaga")
+require("frederick.plugins.lsp.lspconfig")
+require("frederick.plugins.lsp.null-ls")
+require("frederick.plugins.autopairs")
+require("frederick.plugins.treesitter")
+require("frederick.plugins.gitsigns")
+require("obsidian").setup({
+	dir = "/Users/frederickmeneses/Library/CloudStorage/OneDrive-Personal",
+	completion = {
+		nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
+	},
+})
