@@ -1,0 +1,229 @@
+% Package name
+\ProvidesPackage{own}
+
+% Dependencies
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}  % Required for "does not divide" symbol
+\RequirePackage{amsthm}   % Required for theorem environments
+\RequirePackage{algorithm} % Required for algorithm environments
+\RequirePackage{algpseudocode} % Required for pseudocode
+\RequirePackage{tikz} % Required for drawing
+\RequirePackage{hyperref} % Required for \url
+\RequirePackage{listings} % Required for code listings
+\RequirePackage[usenames,dvipsnames]{color} % Required for color
+\RequirePackage{smartref} % Required for referencing line numbers
+
+% TeX trick so that math symbols are bold when text is.
+\let\seiresfb\bfseries\def\bfseries{\boldmath\seiresfb}
+\let\seiresdm\mdseries\def\mdseries{\unboldmath\seiresdm}
+
+% Change the color of the links ...
+\hypersetup{colorlinks} \hypersetup{urlcolor=blue, linkcolor=magenta} 
+
+% Increase line spacing...
+\renewcommand{\baselinestretch}{1.5}
+
+% LaTeX tries to embody the principle "write what you mean", as opposed to
+% "write what you want it to look like". For example, we write
+% \emph{emphasized text} instead of \textit{italics}, so that if we decide to
+% change how we want to represent emphasis, we only need to redefine \emph
+% instead of having to search-and-replace \textit everywhere (and tell the
+% difference between uses of \textit for emphasis vs uses of \textit for other
+% purposes).
+
+% Shorthand for displaystyle math mode.
+\newcommand{\ds}{\displaystyle}
+
+% General fonts and characters.
+\let\strong\textbf                             % strong emphasis
+\let\code\texttt                               % code fragments
+\let\pred\textsl                               % predicate names
+\newcommand{\epsi}{\varepsilon}                % epsilon
+\newcommand{\vphi}{\varphi}                    % phi
+\renewcommand{\vec}[1]{\mathbf{#1}}            % vectors
+\newcommand{\mcal}[1]{\mathcal{#1}}            % mathcal
+
+% Macros for proofs
+\newcommand{\proofheader}[1]{\noindent \underline{\textbf{#1}}}
+\newcommand{\base}{\proofheader{Base Case}:}
+\newcommand{\istep}{\proofheader{Inductive Step}:}
+
+%%% Theorems
+\newtheorem*{claim*}{Claim}
+\newtheorem*{lem*}{Lemma}
+\newtheorem*{crl*}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{ex}{Problem}
+\newtheorem*{ex*}{Problem}
+\newtheorem*{ans*}{Solution}
+
+\setlength{\parskip}{0.3cm}
+\setlength{\parindent}{0cm}
+
+% Semantic names for propositional connectives (and "logical True/False")
+% LaTeX already predefines
+% \lnot = logical not
+% \land = logical and
+% \lor = logical or
+\let\bigimplies\implies
+\renewcommand*\implies{\mathrel{\Rightarrow}}  % smaller than default
+\let\bigiff\iff
+\renewcommand*\iff{\mathrel{\Leftrightarrow}}  % smaller than default
+\newcommand{\True}{\texttt{True}}
+\newcommand{\False}{\texttt{False}}
+
+% Semantic names for bitwise connectives
+\newcommand{\nnot}{\mathrm{NOT}}
+\newcommand{\aand}{\,\,\mathrm{AND}\,\,}
+\newcommand{\oor}{\,\,\mathrm{OR}\,\,}
+\newcommand{\iimplies}{\,\,\mathrm{IMPLIES}\,\,}
+\newcommand{\xor}{\,\,\mathrm{XOR}\,\,}
+\newcommand{\iif}{\,\,\mathrm{IFF}\,\,}
+
+% Semantic name for a "divides" symbol.
+\newcommand{\DIV}{\mathrel\mid}
+\newcommand{\NDIV}{\mathrel\nmid}
+
+% modular arithmetic
+\newcommand{\MOD}{\pmod}
+
+% Number sets
+\newcommand{\N}{\mathbb N}        % Naturals
+\newcommand{\Z}{\mathbb Z}        % Integers
+\newcommand{\Q}{\mathbb Q}        % Rationals
+\newcommand{\R}{\mathbb R}        % Reals
+\newcommand{\bigO}{\mathcal O}    % Big-O
+\newcommand{\powset}{\mathcal P}  % Power set
+
+\newcommand{\st}[2]{\left\{#1\,:\,#2\right\}} % Set notation
+\newcommand{\crd}[1]{\left|#1\right|}         % Cardinality
+\newcommand{\pset}[1]{\mathcal{P}(#1)}        % Power set
+\newcommand{\union}{\cup}                     % Union
+\newcommand{\nats}{\mathbb{N}}                % Naturals
+\newcommand{\ints}{\mathbb{Z}}                % Integers
+\newcommand{\rats}{\mathbb{Q}}                % Rationals
+\newcommand{\reals}{\mathbb{R}}               % Reals 
+\renewcommand{\emptyset}{\varnothing}         % better empty set...
+\renewcommand{\complement}{\mathsf{c}}        % complement
+
+% Short forms for set notation
+\let\emptysetorig\emptyset
+\renewcommand*\emptyset{\varnothing}  % rounder than default
+
+% Math functions
+\newcommand{\floor}[1]{\ds\lfloor #1 \ds\rfloor}         % Floor function
+\newcommand{\ceil}[1]{\left \lceil #1 \right \rceil}     % Ceiling function
+\newcommand{\abs}[1]{\left | #1 \right |}                % Absolute value
+\DeclareMathOperator{\lcm}{lcm}                          % lcm
+
+% Solution to question
+\newcommand{\solution}{\vspace{.25in}\textbf{Solution}\vspace{.10in}}
+
+\newenvironment{solution} % custom solution environment...
+    {
+        \noindent\textbf{Solution.}~ % this stuff automatically is placed before your solution...
+    }
+    {
+        \hfill\qed% this stuff automatically is placed after your solution...
+    }
+    
+% Solution to subquestion
+\newcommand{\solpart}[1] {\vspace{.10in}\textbf{(#1)}}
+
+% Matrix environments
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+% Environment for writing formal proofs================================================
+%
+% \nl ends line and makes next line a Numbered Line
+% \ul ends line and makes next line an Unnumbered Line 
+% \n increases the level of indentation ("next")
+% \p decreases the level of indentation ("previous")
+%\firstline  to number the first line of a proof
+%
+% Example:
+% 
+% 1     let $x \in \nats$ be arbitrary
+% 2         let $y = x+1 \in \nats$
+% 3         $y > x$; property of $\nats$, 2
+% 4      $\exists y \in \nats. (y > x)$; construction 2, 3
+% 5  $\forall x \in \nats. \exists y \in \nats. (y > x)$; generalization 1,4
+%
+
+% this can be typed as follows:
+%
+% \begin{formal}
+% \firstline          <--- to number the first line of a proof
+% \n \label{gen-start} let $x \in \nats$ be arbitrary \nl  
+% \n let $y = x+1 \in \nats$ \label{defy} \nl
+% $y > x$; property of $\nats$, \lref{defy} \label{gt} \nl
+% \p $\exists y \in \nats. (y > x)$; \label{inside} construction \lref{defy},\lref{gt} \nl
+% \p $\forall x \in \nats. \exists y \in \nats. (y > x)$; generalization \lref{gen-start}, \lref{inside}
+% \end{formal}
+% 
+% You can use \labels anywhere in the code and \lref to refer to the line
+% number.  (This is done using smartref package.)
+%
+%to reset the line numbering counter:
+%\setcounter{linenum}{0} 
+
+\newcounter{linenum}
+\addtoreflist{linenum}
+\def\codeTabSpace{\hspace*{4mm}}
+\newenvironment{formal}%
+{\begin{tabbing}%
+\codeTabSpace \= \hspace*{20mm} \= \hspace*{20mm} \= \hspace*{20mm} \= \kill%
+}%
+{\end{tabbing}%
+}
+\newcounter{ind}
+\newcommand{\n}{\addtocounter{ind}{5}\hspace*{5mm}}
+\newcommand{\p}{\addtocounter{ind}{-5}\hspace*{-5mm}}
+\newcommand{\nl}{\\\stepcounter{linenum}{\scriptsize \arabic{linenum}}\>\hspace*{\value{ind}mm}}
+\newcommand{\ul}{\\\>\hspace*{\value{ind}mm}}
+\newcommand{\bl}{\\[-1.5mm]\>\hspace*{\value{ind}mm}}
+\newcommand{\firstline}{\stepcounter{linenum}{\scriptsize \arabic{linenum}}\>}
+\newcommand{\lref}[1]{\linenumref{#1}} % use this to refer to a line number
+% End of stuff for entering formal====================================================
+
+% Custom Python Syntax================================================================
+% Example: \lstinputlisting[language=Python]{code/twisty_too.py}
+\lstset
+{
+    backgroundcolor=\color{yellow},
+    basicstyle=\footnotesize\ttfamily,
+    commentstyle=\color{Green},
+    keywordstyle=\color{Cerulean},
+    frame=lines,
+    language=python,
+    morekeywords={True, False},
+    numbers=left,
+    numbersep=10pt,
+    numberstyle=\footnotesize\color{Gray},
+    showstringspaces=false,
+    stringstyle=\color{Mulberry},
+    tabsize=3,
+}
+
+% Color Numbers
+\lstset
+{
+    literate=%
+    {0}{{{\color{Orange}0}}}1
+    {1}{{{\color{Orange}1}}}1
+    {2}{{{\color{Orange}2}}}1
+    {3}{{{\color{Orange}3}}}1
+    {4}{{{\color{Orange}4}}}1
+    {5}{{{\color{Orange}5}}}1
+    {6}{{{\color{Orange}6}}}1
+    {7}{{{\color{Orange}7}}}1
+    {8}{{{\color{Orange}8}}}1
+    {9}{{{\color{Orange}9}}}1
+}
+% End of Custom Python Syntax============================================================
