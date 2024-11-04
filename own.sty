@@ -16,6 +16,12 @@
 \RequirePackage{listings} % Required for code listings
 \RequirePackage[usenames,dvipsnames]{color} % Required for color
 \RequirePackage{smartref} % Required for referencing line numbers
+\RequirePackage{mathrsfs} % Required for \mathscr
+\RequirePackage{enumitem} % Required for custom lists
+\RequirePackage[margin=2cm]{geometry} % Required for page margins
+\RequirePackage{graphicx} % Required for including graphics
+\RequirePackage{minted} % Required for syntax highlighting
+\RequirePackage{comment} % Required for comment environment
 
 % TeX trick so that math symbols are bold when text is.
 \let\seiresfb\bfseries\def\bfseries{\boldmath\seiresfb}
@@ -181,7 +187,7 @@
 \def\codeTabSpace{\hspace*{4mm}}
 \newenvironment{formal}%
 {\begin{tabbing}%
-\codeTabSpace \= \hspace*{20mm} \= \hspace*{20mm} \= \hspace*{20mm} \= \kill%
+\codeTabSpace \= \hspace*{20mm} \= \hspace*{20mm} \= \hspace*{20mm} \= \hspace*{20mm} \= \kill%
 }%
 {\end{tabbing}%
 }
