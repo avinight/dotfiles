@@ -5,6 +5,7 @@
 \ProvidesPackage{own}
 
 % Dependencies
+\PassOptionsToPackage{usenames,dvipsnames}{xcolor}
 \RequirePackage{amsmath}
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}  % Required for "does not divide" symbol
@@ -14,7 +15,6 @@
 \RequirePackage{tikz} % Required for drawing
 \RequirePackage{hyperref} % Required for \url
 \RequirePackage{listings} % Required for code listings
-\RequirePackage[usenames,dvipsnames]{color} % Required for color
 \RequirePackage{smartref} % Required for referencing line numbers
 \RequirePackage{mathrsfs} % Required for \mathscr
 \RequirePackage{enumitem} % Required for custom lists
@@ -128,8 +128,7 @@
 \DeclareMathOperator{\lcm}{lcm}                          % lcm
 
 % Solution to question
-\newcommand{\solution}{\vspace{.25in}\textbf{Solution}\vspace{.10in}}
-
+\renewcommand{\qed}{\hfill \ensuremath{\blacksquare}}
 \newenvironment{solution} % custom solution environment...
     {
         \noindent\textbf{Solution.}~ % this stuff automatically is placed before your solution...
@@ -137,7 +136,7 @@
     {
         \hfill\qed% this stuff automatically is placed after your solution...
     }
-    
+
 % Solution to subquestion
 \newcommand{\solpart}[1] {\vspace{.10in}\textbf{(#1)}}
 
