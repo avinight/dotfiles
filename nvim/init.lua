@@ -10,12 +10,12 @@ require("frederick.plugins.nvim-cmp")
 require("frederick.plugins.lsp.mason")
 require("frederick.plugins.lsp.lspsaga")
 require("frederick.plugins.lsp.lspconfig")
-require("frederick.plugins.lsp.null-ls")
+require("frederick.plugins.lsp.none-ls")
 require("frederick.plugins.autopairs")
 require("frederick.plugins.treesitter")
 require("frederick.plugins.gitsigns")
 require("obsidian").setup({
-	dir = "/Users/frederickmeneses/Library/CloudStorage/OneDrive-Personal",
+	dir = "",
 	completion = {
 		nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
 	},

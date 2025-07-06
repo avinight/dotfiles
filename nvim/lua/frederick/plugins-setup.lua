@@ -77,11 +77,12 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig") -- easily configure language servers
 	use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
 	use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
-	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
+	use("pmizio/typescript-tools.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
 	-- formatting & linting
-	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
+	use("nvimtools/none-ls.nvim") -- configure formatters & linters
+	use("nvimtools/none-ls-extras.nvim") -- none-ls dependency
 	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
 	-- treesitter configuration
