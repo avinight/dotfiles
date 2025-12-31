@@ -1,0 +1,50 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "ssh_connections": [
+    {
+      "host": "teach.cs.utoronto.ca",
+      "username": "menese23",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/friedrice"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "100.105.116.102",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/friedrice/Documents/uoft/2025-2026"
+          ]
+        },
+        {
+          "paths": [
+            "/home/friedrice/Documents/uoft/2025-2026/csc443-fall-2025/project/443-kvstore/./"
+          ]
+        }
+      ],
+      "nickname": "friedrice"
+    }
+  ],
+  "vim_mode": true,
+  "disable_ai": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Light"
+  }
+}
