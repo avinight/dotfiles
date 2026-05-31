@@ -1,7 +1,6 @@
--- set colorscheme to kanagawa with protected call
--- in case it isn't installed
-local status, _ = pcall(vim.cmd, "colorscheme kanagawa")
+local scheme = vim.fn.hostname() == "fedora" and "kanagawa-lotus" or "kanagawa"
+local status, _ = pcall(vim.cmd, "colorscheme " .. scheme)
 if not status then
-	print("Colorscheme not found!") -- print error if colorscheme not installed
+	print("Colorscheme not found!")
 	return
 end
