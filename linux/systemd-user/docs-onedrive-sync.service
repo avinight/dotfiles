@@ -1,0 +1,11 @@
+[Unit]
+Description=Nightly one-way guarded mirror of ~/Documents/{textbooks,uoft} to OneDrive
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+Nice=10
+IOSchedulingClass=idle
+ExecStart=/home/friedrice/.local/bin/docs-onedrive-sync.sh
+TimeoutStartSec=6h

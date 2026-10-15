@@ -1,0 +1,24 @@
+services:
+  kavita:
+    image: jvmilazz0/kavita:latest
+    container_name: kavita
+    restart: unless-stopped
+    environment:
+      TZ: "America/Toronto"
+    volumes:
+      - ./config:/kavita/config
+      # Your book library, READ-ONLY so Kavita can never modify the files.
+      # Includes music/Sheet Music since that now lives under Library/.
+      - /home/friedrice/Documents/Library:/books:ro
+      # Non-textbook reading (novels/plays) -> separate Kavita library.
+      - /home/friedrice/Documents/Reading:/reading:ro
+      # Sheet music (scores you play) -> its own Kavita library.
+      - /home/friedrice/Documents/Sheet Music:/sheetmusic:ro
+    ports:
+      # Loopback (for `tailscale serve` on :8445 + local web UI).
+      - "127.0.0.1:5000:5000"
+      # Direct tailnet bind so mobile reader apps (Paperback/Kavya) can hit
+      # http://<YOUR_TAILSCALE_IP>:5000 straight, avoiding the HTTPS-proxy-on-odd-port
+      # issues. Tailnet is private + WireGuard-encrypted. <YOUR_TAILSCALE_IP> = this
+      # node's stable Tailscale IP.
+      - "<YOUR_TAILSCALE_IP>:5000:5000"

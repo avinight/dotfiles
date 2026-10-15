@@ -1,0 +1,10 @@
+[Unit]
+Description=Tidy Kavita book libraries (folderize uploads + strip embedded PDF titles)
+
+[Service]
+Type=oneshot
+Nice=15
+# Small, low-VRAM local model for the naming step (~1 GB). Picked over llama3.2:1b
+# and qwen2.5:3b after testing — most accurate here at the smallest size.
+Environment=KAVITA_TIDY_MODEL=qwen2.5:1.5b
+ExecStart=/home/friedrice/.local/share/kavita-tidy-venv/bin/python /home/friedrice/.local/bin/kavita-tidy.py

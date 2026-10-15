@@ -1,0 +1,12 @@
+[Unit]
+Description=Nightly Immich->OneDrive backup (after Immich's 02:00 DB dump)
+
+[Timer]
+# Run at 03:00; Immich's DB dump lands at 02:00, so the dump is fresh.
+OnCalendar=*-*-* 03:00:00
+# If the machine was off/asleep at 03:00, run once it's back up.
+Persistent=true
+RandomizedDelaySec=10m
+
+[Install]
+WantedBy=timers.target

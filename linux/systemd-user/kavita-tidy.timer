@@ -1,0 +1,9 @@
+[Unit]
+Description=Nightly Kavita library tidy (before the OneDrive docs sync)
+
+[Timer]
+OnCalendar=*-*-* 03:20:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,21 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: filebrowser
+    # Run as friedrice so uploaded files are owned by you (Kavita can read them,
+    # you can edit them), not root.
+    user: "1000:1000"
+    restart: unless-stopped
+    environment:
+      FB_DATABASE: /database/filebrowser.db
+      FB_ROOT: /srv
+    volumes:
+      # WRITE access to the libraries so you can upload. Kavita still mounts
+      # these same folders READ-ONLY, so Kavita itself can never modify them.
+      - /home/friedrice/Documents/Library:/srv/Library
+      - /home/friedrice/Documents/Reading:/srv/Reading
+      - ./database:/database
+      - ./config:/config
+    ports:
+      # Loopback only; exposed to your tailnet via `tailscale serve` on :8446.
+      - "127.0.0.1:8086:80"

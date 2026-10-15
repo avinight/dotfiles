@@ -1,0 +1,17 @@
+# Never commit runtime state / secrets, even if copied in here later.
+# (The live state dirs live outside the repo; these patterns are a safety net.)
+*.db
+*.sqlite
+*.sqlite3
+config/
+database/
+rclone.conf
+*.key
+*.pem
+.kavita_jwt
+# Syncthing state / Filebrowser state if ever placed under this dir
+syncthing/
+filebrowser/database/
+filebrowser/config/
+# the syncthing binary (a release download, not source)
+bin/syncthing

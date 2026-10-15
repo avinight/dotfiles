@@ -1,0 +1,12 @@
+[Unit]
+Description=Back up Immich originals + DB dump to OneDrive via rclone
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+Nice=10
+IOSchedulingClass=idle
+ExecStart=/home/friedrice/.local/bin/immich-onedrive-backup.sh
+# Don't let a stalled upload run forever
+TimeoutStartSec=12h
