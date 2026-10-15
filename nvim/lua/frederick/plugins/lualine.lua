@@ -46,6 +46,7 @@ lualine_nightfly.command = {
 -- configure lualine with modified theme
 lualine.setup({
 	options = {
-		theme = lualine_palenight,
+		theme = "kanagawa",
+		globalstatus = true,
 	},
 })

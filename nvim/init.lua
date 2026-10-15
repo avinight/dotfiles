@@ -14,9 +14,4 @@ require("frederick.plugins.lsp.none-ls")
 require("frederick.plugins.autopairs")
 require("frederick.plugins.treesitter")
 require("frederick.plugins.gitsigns")
-require("obsidian").setup({
-	dir = "",
-	completion = {
-		nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
-	},
-})
+

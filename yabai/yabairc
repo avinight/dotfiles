@@ -1,4 +1,4 @@
-# for this to work you must configure sudo such that
+#for this to work you must configure sudo such that
 # it will be able to run the command without password
 
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
@@ -32,3 +32,4 @@ yabai -m config mouse_action2 resize
 
 # when window is dropped in center of another window, swap them (on edges it will split it)
 yabai -m mouse_drop_action swap
+

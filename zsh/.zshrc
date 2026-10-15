@@ -1,5 +1,22 @@
+# --- 1. OS DETECTION ---
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export IS_MAC=1
+else
+    export IS_MAC=0
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+# --- 2. PATH & HOMEBREW ---
+# Add Homebrew to PATH based on OS
+if [[ $IS_MAC -eq 1 ]]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+else
+    # Common Linuxbrew location or local bin
+    [[ -d /home/linuxbrew/.linuxbrew/bin ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -70,7 +87,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+    git
+    zsh-autosuggestions 
+    zsh-completions 
+    zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,16 +126,45 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 #
-# Extra plugins:
-plugins=(
-    git 
-    zsh-autosuggestions 
-    zsh-completions 
-    zsh-syntax-highlighting
-)
 
-# Starship shell integration:
-eval "$(starship init zsh)"
+# --- 4. SHELL INTEGRATIONS ---
+# Starship (ensure starship is installed on both)
+if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
+fi
 
-# Fuzzy Finder shell integration:
-source <(fzf --zsh)
+# FZF integration
+if command -v fzf &> /dev/null; then
+    source <(fzf --zsh)
+fi
+
+# --- 5. CONDA INITIALIZATION (Portable) ---
+# Replace hardcoded paths with $HOME
+if [ -f "$HOME/miniconda3/bin/conda" ]; then
+    __conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "$HOME/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="$HOME/miniconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+fi
+
+# --- 6. LANGUAGE TOOLS & COMPLETION ---
+autoload -U compinit
+compinit
+
+# GHCup (Haskell)
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env"
+
+# Go (Golang)
+if command -v go &> /dev/null; then
+    export PATH="$PATH:$(go env GOPATH)/bin"
+fi
+
+# Pipx & Local Bin
+export PATH="$PATH:$HOME/.local/bin"
